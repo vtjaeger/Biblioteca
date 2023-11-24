@@ -1,14 +1,13 @@
 package br.com.livros.model.livro;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-public record DadosCadastroLivro(
-        @NotBlank
+public record DadosAtualizacaoLivro(
+        @NotNull
+        Long id,
         String titulo,
-        @NotBlank
         String autor,
-        @NotBlank
-        String descricao){
-
+        String descricao) {
 }

@@ -1,17 +1,17 @@
 package br.com.livros.controller;
 
-import br.com.livros.model.livro.DadosCadastroLivro;
-import br.com.livros.model.livro.Livro;
-import br.com.livros.model.livro.LivroRepository;
+import br.com.livros.model.livro.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.sql.PreparedStatement;
 
 @RestController
 @RequestMapping("livros")
@@ -29,4 +29,20 @@ public class LivrosController {
         return ResponseEntity.created(uri).body(livro);
     }
 
+    @GetMapping
+    public ResponseEntity<Page<DadosExibirLivro>> exibirLivros(@PageableDefault(size = 10) Pageable paginacao) {
+        var page = repository.findAll(paginacao)
+                .map(DadosExibirLivro::new);
+
+        return ResponseEntity.ok(page);
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity atualizarLivro(@RequestBody @Valid DadosAtualizacaoLivro dadosAtualizacao){
+        var livro = repository.getReferenceById(dadosAtualizacao.id());
+        livro.atualizarInformacoes(dadosAtualizacao);
+
+        return ResponseEntity.ok(new DadosExibirLivro(livro));
+    }
 }
