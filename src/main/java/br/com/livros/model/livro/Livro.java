@@ -1,5 +1,6 @@
 package br.com.livros.model.livro;
 
+import br.com.livros.model.editora.Editora;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,10 +20,13 @@ public class Livro {
     private String autor;
     private String descricao;
 
+    private String editora;
+
     public Livro(DadosCadastroLivro dadosLivro) {
         this.autor = dadosLivro.autor();
         this.titulo = dadosLivro.titulo();
         this.descricao = dadosLivro.descricao();
+        this.editora = dadosLivro.editora();
     }
 
     public void atualizarInformacoes(DadosAtualizacaoLivro dadosAtualizacao){
@@ -34,6 +38,9 @@ public class Livro {
         }
         if(dadosAtualizacao.descricao() != null){
             this.descricao = dadosAtualizacao.descricao();
+        }
+        if(dadosAtualizacao.editora() != null){
+            this.editora = dadosAtualizacao.editora();
         }
     }
 }
