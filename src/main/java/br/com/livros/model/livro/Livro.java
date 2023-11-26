@@ -28,7 +28,6 @@ public class Livro {
         this.descricao = dadosLivro.descricao();
         this.editora = dadosLivro.editora();
     }
-
     public void atualizarInformacoes(DadosAtualizacaoLivro dadosAtualizacao){
         if(dadosAtualizacao.autor() != null){
             this.autor = dadosAtualizacao.autor();
