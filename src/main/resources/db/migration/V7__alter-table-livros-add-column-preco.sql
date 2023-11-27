@@ -1,0 +1,1 @@
+alter table livros add column preco decimal(5,2) not null;

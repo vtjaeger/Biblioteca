@@ -2,6 +2,8 @@ package br.com.livros.model.livro;
 
 import jakarta.validation.constraints.NotBlank;
 
+import java.math.BigDecimal;
+
 public record DadosCadastroLivro(
         @NotBlank
         String titulo,
@@ -11,5 +13,6 @@ public record DadosCadastroLivro(
         String descricao,
         @NotBlank
         String editora,
+        @NotBlank
         String preco){
 }

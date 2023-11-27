@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Table(name = "livros")
 @Entity(name = "Livro")
 @NoArgsConstructor
@@ -20,14 +22,14 @@ public class Livro {
     private String descricao;
 
     private String editora;
-    private String preco;
+    private BigDecimal preco;
 
     public Livro(DadosCadastroLivro dadosLivro) {
         this.autor = dadosLivro.autor();
         this.titulo = dadosLivro.titulo();
         this.descricao = dadosLivro.descricao();
         this.editora = dadosLivro.editora();
-        this.preco = dadosLivro.preco();
+        this.preco = new BigDecimal(dadosLivro.preco().replace(',', '.'));
     }
     public void atualizarInformacoes(DadosAtualizacaoLivro dadosAtualizacao){
         if(dadosAtualizacao.autor() != null){
@@ -43,7 +45,7 @@ public class Livro {
             this.editora = dadosAtualizacao.editora();
         }
         if(dadosAtualizacao.preco() != null){
-            this.preco = dadosAtualizacao.preco();
+            this.preco = new BigDecimal(dadosAtualizacao.preco().replace(',','.'));
         }
     }
 }
