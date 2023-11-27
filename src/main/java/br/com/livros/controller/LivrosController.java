@@ -53,4 +53,12 @@ public class LivrosController {
         livro.excluir();
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping("/{id}")
+    @Transactional
+    public ResponseEntity ativar(@PathVariable Long id){
+        var livro = repository.getReferenceById(id);
+        livro.ativar();
+        return ResponseEntity.ok(new DadosExibirLivro(livro));
+    }
 }

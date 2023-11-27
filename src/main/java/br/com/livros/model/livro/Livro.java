@@ -59,4 +59,7 @@ public class Livro {
     public void excluir(){
         this.disponivel = false;
     }
+    public void ativar(){
+        this.disponivel = true;
+    }
 }
