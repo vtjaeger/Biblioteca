@@ -1,9 +1,11 @@
 package br.com.livros.model.livro;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMax;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Range;
 
 import java.math.BigDecimal;
 
@@ -22,7 +24,11 @@ public class Livro {
     private String descricao;
 
     private String editora;
+
+    @DecimalMax(value = "999999.99", message = "O preco deve conter apenas 2 casas decimais.")
     private BigDecimal preco;
+
+    private Boolean disponivel;
 
     public Livro(DadosCadastroLivro dadosLivro) {
         this.autor = dadosLivro.autor();
@@ -30,6 +36,7 @@ public class Livro {
         this.descricao = dadosLivro.descricao();
         this.editora = dadosLivro.editora();
         this.preco = new BigDecimal(dadosLivro.preco().replace(',', '.'));
+        this.disponivel = true;
     }
     public void atualizarInformacoes(DadosAtualizacaoLivro dadosAtualizacao){
         if(dadosAtualizacao.autor() != null){
@@ -47,5 +54,9 @@ public class Livro {
         if(dadosAtualizacao.preco() != null){
             this.preco = new BigDecimal(dadosAtualizacao.preco().replace(',','.'));
         }
+    }
+
+    public void excluir(){
+        this.disponivel = false;
     }
 }

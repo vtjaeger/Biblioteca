@@ -31,7 +31,7 @@ public class LivrosController {
 
     @GetMapping
     public ResponseEntity<Page<DadosExibirLivro>> exibirLivros(@PageableDefault(size = 10) Pageable paginacao) {
-        var page = repository.findAll(paginacao)
+        var page = repository.findByDisponivelTrue(paginacao)
                 .map(DadosExibirLivro::new);
 
         return ResponseEntity.ok(page);
@@ -44,5 +44,13 @@ public class LivrosController {
         livro.atualizarInformacoes(dadosAtualizacao);
 
         return ResponseEntity.ok(new DadosExibirLivro(livro));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity excluir(@PathVariable Long id){
+        var livro = repository.getReferenceById(id);
+        livro.excluir();
+        return ResponseEntity.noContent().build();
     }
 }

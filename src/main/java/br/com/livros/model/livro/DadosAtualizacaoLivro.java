@@ -13,5 +13,6 @@ public record DadosAtualizacaoLivro(
         String autor,
         String descricao,
         String editora,
-        String preco) {
+        String preco,
+        Boolean disponivel) {
 }
