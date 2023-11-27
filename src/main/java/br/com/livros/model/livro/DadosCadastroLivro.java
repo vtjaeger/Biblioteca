@@ -1,8 +1,6 @@
 package br.com.livros.model.livro;
 
-import br.com.livros.model.editora.Editora;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 public record DadosCadastroLivro(
         @NotBlank
@@ -12,5 +10,6 @@ public record DadosCadastroLivro(
         @NotBlank
         String descricao,
         @NotBlank
-        String editora){
+        String editora,
+        String preco){
 }
