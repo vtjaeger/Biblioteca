@@ -54,7 +54,6 @@ public class Livro {
             this.preco = new BigDecimal(dadosAtualizacao.preco().replace(',','.'));
         }
     }
-
     public void excluir(){
         this.disponivel = false;
     }

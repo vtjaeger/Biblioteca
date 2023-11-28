@@ -31,4 +31,5 @@ public class Editora {
         this.nome = dadosEditora.nome();
         this.endereco = dadosEditora.endereco();
     }
+
 }
