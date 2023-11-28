@@ -1,5 +1,7 @@
 package br.com.livros.controller;
 
+import br.com.livros.model.editora.DadosEditora;
+import br.com.livros.model.endereco.DadosEndereco;
 import br.com.livros.model.livro.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

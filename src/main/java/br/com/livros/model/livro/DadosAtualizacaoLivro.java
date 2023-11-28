@@ -1,5 +1,6 @@
 package br.com.livros.model.livro;
 
+import br.com.livros.model.editora.Editora;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +13,6 @@ public record DadosAtualizacaoLivro(
         String titulo,
         String autor,
         String descricao,
-        String editora,
         String preco,
         Boolean disponivel) {
 }

@@ -1,7 +1,9 @@
 package br.com.livros.model.livro;
 
-public record DadosExibirLivro(String titulo, String autor, String descricao, String editora, String preco) {
+import br.com.livros.model.editora.Editora;
+
+public record DadosExibirLivro(String titulo, String autor, String descricao, String preco) {
     public DadosExibirLivro(Livro livro){
-        this(livro.getTitulo(), livro.getAutor(), livro.getDescricao(), livro.getEditora(), livro.getPreco().toString());
+        this(livro.getTitulo(), livro.getAutor(), livro.getDescricao(), livro.getPreco().toString());
     }
 }

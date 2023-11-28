@@ -1,0 +1,1 @@
+alter table editoras add column nome varchar(70) not null;
