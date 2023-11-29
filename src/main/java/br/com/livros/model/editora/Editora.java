@@ -1,5 +1,6 @@
 package br.com.livros.model.editora;
 
+import br.com.livros.model.endereco.DadosAtualizacaoEndereco;
 import br.com.livros.model.endereco.DadosEndereco;
 import br.com.livros.model.endereco.Endereco;
 import jakarta.persistence.*;
@@ -26,10 +27,16 @@ public class Editora {
         this.nome = dados.nome();
         this.endereco = endereco;
     }
-
-    public Editora(DadosEditora dadosEditora) {
-        this.nome = dadosEditora.nome();
-        this.endereco = dadosEditora.endereco();
+    public Editora(Long id) {
+        this.id = id;
     }
 
+    public void atualizarInformacoes(DadosAtualizacaoEditora dadosAtualizacao) {
+        if(dadosAtualizacao.nome() != null){
+            this.nome = dadosAtualizacao.nome();
+        }
+        if (dadosAtualizacao.endereco() != null) {
+            this.endereco.atualizarInformacoes(dadosAtualizacao.endereco());
+        }
+    }
 }

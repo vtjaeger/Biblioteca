@@ -1,13 +1,12 @@
 package br.com.livros.model.livro;
 
-import br.com.livros.model.editora.DadosEditora;
 import br.com.livros.model.editora.Editora;
+import br.com.livros.model.editora.EditoraRepository;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMax;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Range;
 
 import java.math.BigDecimal;
 
@@ -30,8 +29,9 @@ public class Livro {
 
     private Boolean disponivel;
 
-    @ManyToOne
-    private Editora editora;
+//    @ManyToOne
+    @JoinColumn(name = "editora_id")
+    private String editora_id;
 
     public Livro(DadosCadastroLivro dadosLivro) {
         this.autor = dadosLivro.autor();
@@ -39,6 +39,7 @@ public class Livro {
         this.descricao = dadosLivro.descricao();
         this.preco = new BigDecimal(dadosLivro.preco().replace(',', '.'));
         this.disponivel = true;
+        this.editora_id = dadosLivro.editora_id();
     }
     public void atualizarInformacoes(DadosAtualizacaoLivro dadosAtualizacao){
         if(dadosAtualizacao.autor() != null){
@@ -52,6 +53,9 @@ public class Livro {
         }
         if(dadosAtualizacao.preco() != null){
             this.preco = new BigDecimal(dadosAtualizacao.preco().replace(',','.'));
+        }
+        if(dadosAtualizacao.editora_id() != null){
+            this.editora_id = dadosAtualizacao.editora_id();
         }
     }
     public void excluir(){

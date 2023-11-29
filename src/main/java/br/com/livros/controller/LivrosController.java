@@ -1,7 +1,5 @@
 package br.com.livros.controller;
 
-import br.com.livros.model.editora.DadosEditora;
-import br.com.livros.model.endereco.DadosEndereco;
 import br.com.livros.model.livro.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.sql.PreparedStatement;
 
 @RestController
 @RequestMapping("livros")

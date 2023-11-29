@@ -16,5 +16,7 @@ public record DadosCadastroLivro(
         @NotBlank
         String descricao,
         @NotBlank
-        String preco){
+        String preco,
+        @NotNull
+        String editora_id){
 }
