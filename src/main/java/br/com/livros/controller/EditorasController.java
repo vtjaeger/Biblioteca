@@ -36,8 +36,8 @@ public class EditorasController {
     }
     @GetMapping
     public ResponseEntity<Page<DadosExibirEditora>> exibirEditoras(@PageableDefault(size = 10) Pageable paginacao) {
-        Page<DadosExibirEditora> page = repository.findAll(paginacao)
-                .map((Function<? super Editora, ? extends DadosExibirEditora>) DadosExibirEditora::new);
+        Page<DadosExibirEditora> page = repository.findByDisponivelTrue(paginacao)
+                .map(DadosExibirEditora::new);
 
         return ResponseEntity.ok(page);
     }
@@ -48,6 +48,22 @@ public class EditorasController {
         var editora = repository.getReferenceById(dadosAtualizacao.id());
         editora.atualizarInformacoes(dadosAtualizacao);
 
+        return ResponseEntity.ok(new DadosExibirEditora(editora));
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity excluir(@PathVariable Long id){
+        var editora = repository.getReferenceById(id);
+        editora.excluir();
+        return ResponseEntity.ok(new DadosExibirEditora(editora));
+    }
+
+    @PatchMapping("/{id}")
+    @Transactional
+    public ResponseEntity ativar(@PathVariable Long id){
+        var editora = repository.getReferenceById(id);
+        editora.ativar();
         return ResponseEntity.ok(new DadosExibirEditora(editora));
     }
 

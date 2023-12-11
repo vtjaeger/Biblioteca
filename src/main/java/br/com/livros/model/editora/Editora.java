@@ -20,12 +20,15 @@ public class Editora {
 
     private String nome;
 
+    private Boolean disponivel;
+
     @Embedded
     private Endereco endereco;
 
     public Editora(DadosCadastroEditora dados, Endereco endereco) {
         this.nome = dados.nome();
         this.endereco = endereco;
+        this.disponivel = true;
     }
     public Editora(Long id) {
         this.id = id;
@@ -38,5 +41,16 @@ public class Editora {
         if (dadosAtualizacao.endereco() != null) {
             this.endereco.atualizarInformacoes(dadosAtualizacao.endereco());
         }
+        if(dadosAtualizacao.disponivel() != null){
+            this.disponivel = dadosAtualizacao.disponivel();
+        }
+    }
+
+    public void excluir() {
+        this.disponivel = false;
+    }
+
+    public void ativar() {
+        this.disponivel = true;
     }
 }
